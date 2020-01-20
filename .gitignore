@@ -5,6 +5,8 @@ verbose/
 .pio/*
 */.gitignore
 
+.DS_STORE
+*/.DS_STORE
 
 */.pio/*
 */platformio.ini
