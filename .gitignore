@@ -7,6 +7,8 @@ verbose/
 
 .DS_STORE
 */.DS_STORE
+*/README
+*/.travis.yml
 
 */.pio/*
 */platformio.ini

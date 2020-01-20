@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 // Feather9x_TX
 // -*- mode: C++ -*-
 //#include <RH_RF95.h>
