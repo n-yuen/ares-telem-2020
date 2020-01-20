@@ -23,6 +23,8 @@ namespace Rocket {
 		float Mpu_magX;
 		float Mpu_magY;
 		float Mpu_magZ;
+		float Gps_lat;
+		float Gps_lng;
 		uint32_t timestamp;
 		byte end1 = 0xA4;
 		byte end2 = 0x55;

@@ -1,6 +1,14 @@
 verbose/
 
 .vscode/*
+.pip/*
+.pio/*
+*/.gitignore
+
+
+*/.pio/*
+*/platformio.ini
+platformio.ini
 !.vscode/arduino.json
 config.csv
 rocket_data.csv
