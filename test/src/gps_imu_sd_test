@@ -64,7 +64,7 @@ void setup() {
     Serial.println("initialization done.");
 
     SD.remove("test.txt");
-     SD.remove("testg.txt");
+    SD.remove("testg.txt");
 }
 
 void loop() {
@@ -78,10 +78,10 @@ void loop() {
         if (gps.location.isUpdated()) {
             unsigned long currentMillis = millis();
             
-        myFile = SD.open("test.txt", FILE_WRITE);
+        myFile = SD.open("testg.txt", FILE_WRITE);
         // if the file opened okay, write to it:
         if (myFile) {
-            Serial.print("Writing to test.txt...");
+            Serial.println("Writing GPS data...");
             myFile.print("Lat = ");
             myFile.println(gps.location.lat(), 6);
             myFile.print("Lng = ");
@@ -93,43 +93,43 @@ void loop() {
             else {
             // if the file didn't open, print an error:
             Serial.println("error opening test.txt");
-        }
+          }
         }
 
 //READ IMU DATA
-        float ax, ay, az, gx, gy, gz, mx, my, mz = 0;
-        if (IMU.accelerationAvailable())  {
-          IMU.readAcceleration(ax, ay, az);
-        }
-        if (IMU.gyroscopeAvailable()){
-          IMU.readGyroscope(gx, gy, gz);
-        }
-        if (IMU.magneticFieldAvailable()){
-          IMU.readMagneticField(mx, my, mz);
-        }
-        
-         myFile = SD.open("test.txt", FILE_WRITE);
-         if (myFile) {
-                  Serial.print("Writing to test.txt...");
-                  myFile.print("Accel = ");
-                  myFile.print(ax);
-                  myFile.print(ay);
-                  myFile.println(az);
-                  myFile.print("Gyro = ");
-                  myFile.print(gx);
-                  myFile.print(gy);
-                  myFile.println(mz);
-                  myFile.print("Mag = ");
-                  myFile.print(mx);
-                  myFile.print(my);
-                  myFile.println(mz);
-                // close the file:
-                  myFile.close();
-                  Serial.println("done.");
-          } 
-          else {
-                  // if the file didn't open, print an error:
-                  Serial.println("error opening test.txt");
-          }
+//        float ax, ay, az, gx, gy, gz, mx, my, mz = 0;
+//        if (IMU.accelerationAvailable())  {
+//          IMU.readAcceleration(ax, ay, az);
+//        }
+//        if (IMU.gyroscopeAvailable()){
+//          IMU.readGyroscope(gx, gy, gz);
+//        }
+//        if (IMU.magneticFieldAvailable()){
+//          IMU.readMagneticField(mx, my, mz);
+//        }
+//        
+//         myFile = SD.open("test.txt", FILE_WRITE);
+//         if (myFile) {
+//                  Serial.print("Writing to test.txt...");
+//                  myFile.print("Accel = ");
+//                  myFile.print(ax);
+//                  myFile.print(ay);
+//                  myFile.println(az);
+//                  myFile.print("Gyro = ");
+//                  myFile.print(gx);
+//                  myFile.print(gy);
+//                  myFile.println(mz);
+//                  myFile.print("Mag = ");
+//                  myFile.print(mx);
+//                  myFile.print(my);
+//                  myFile.println(mz);
+//                // close the file:
+//                  myFile.close();
+//                  Serial.println("done.");
+//          } 
+//          else {
+//                  // if the file didn't open, print an error:
+//                  Serial.println("error opening test.txt");
+//          }
     }
 }
