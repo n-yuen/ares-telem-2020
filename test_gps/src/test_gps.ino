@@ -1,3 +1,5 @@
+#include <Arduino_HTS221.h>
+#include <Arduino_LPS22HB.h>
 #include <SPI.h>
 #include <SD.h>
 #include <Arduino_LSM9DS1.h>
@@ -55,6 +57,14 @@ void setup() {
       Serial.println("Failed to initialize IMU!");
       while (1);
     }
+    if (!BARO.begin()) {
+      Serial.println("Failed to initialize barometer!");
+      while (1);
+    }
+    if (!HTS.begin()) {
+      Serial.println("Failed to initialize temp sensor!");
+      while (1);
+    }
 
     Serial.print("Initializing SD card...");
     if (!SD.begin(SD_CHIPSEL)) {
@@ -76,11 +86,12 @@ void loop() {
         gps.encode(x);
         
         if (gps.location.isUpdated()) {
+            unsigned long currentMillis = millis();
             
         myFile = SD.open("testg.txt", FILE_WRITE);
         // if the file opened okay, write to it:
         if (myFile) {
-            Serial.print("Writing GPS data...");
+            Serial.println("Writing GPS data...");
             myFile.print("Lat = ");
             myFile.println(gps.location.lat(), 6);
             myFile.print("Lng = ");
@@ -96,39 +107,45 @@ void loop() {
         }
 
 //READ IMU DATA
-       float ax, ay, az, gx, gy, gz, mx, my, mz = 0;
-       if (IMU.accelerationAvailable())  {
-         IMU.readAcceleration(ax, ay, az);
-       }
-       if (IMU.gyroscopeAvailable()){
-         IMU.readGyroscope(gx, gy, gz);
-       }
-       if (IMU.magneticFieldAvailable()){
-         IMU.readMagneticField(mx, my, mz);
-       }
-       
-        myFile = SD.open("test.txt", FILE_WRITE);
-        if (myFile) {
-                 Serial.print("Writing IMU data...");
-                 myFile.print("Accel = ");
-                 myFile.print(ax);
-                 myFile.print(ay);
-                 myFile.println(az);
-                 myFile.print("Gyro = ");
-                 myFile.print(gx);
-                 myFile.print(gy);
-                 myFile.println(mz);
-                 myFile.print("Mag = ");
-                 myFile.print(mx);
-                 myFile.print(my);
-                 myFile.println(mz);
-               // close the file:
-                 myFile.close();
-                 Serial.println("done.");
-         } 
-         else {
-                 // if the file didn't open, print an error:
-                 Serial.println("error opening test.txt");
-         }
+        float ax, ay, az, gx, gy, gz, mx, my, mz = 0;
+        if (IMU.accelerationAvailable())  {
+          IMU.readAcceleration(ax, ay, az);
+        }
+        if (IMU.gyroscopeAvailable()){
+          IMU.readGyroscope(gx, gy, gz);
+        }
+        if (IMU.magneticFieldAvailable()){
+          IMU.readMagneticField(mx, my, mz);
+        }
+        float temp = HTS.readTemperature(CELCIUS);
+        float pressure = BARO.readPressure(kilopascal);
+        
+         myFile = SD.open("test.txt", FILE_WRITE);
+         if (myFile) {
+                  Serial.print("Writing to test.txt...");
+                  myFile.print("Accel = ");
+                  myFile.print(ax);
+                  myFile.print(ay);
+                  myFile.println(az);
+                  myFile.print("Gyro = ");
+                  myFile.print(gx);
+                  myFile.print(gy);
+                  myFile.println(mz);
+                  myFile.print("Mag = ");
+                  myFile.print(mx);
+                  myFile.print(my);
+                  myFile.println(mz);
+                  myFile.print("Temp = ");
+                  myFile.println(temp);
+                  myFile.print("Pressure = ");
+                  myFile.println(pressure);
+                // close the file:
+                  myFile.close();
+                  Serial.println("done.");
+          } 
+          else {
+                  // if the file didn't open, print an error:
+                  Serial.println("error opening test.txt");
+          }
     }
 }
