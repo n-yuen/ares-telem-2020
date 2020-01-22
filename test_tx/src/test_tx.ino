@@ -6,12 +6,14 @@ void setup(){
         delay(1);
     }
     Serial.println("All set up");
-    Serial1.begin(9600);
+    Serial1.begin(57600);
 
 
 }
 
 void loop(){
-    Serial1.println("pee pee");
+    char msg[] = "pee pee";
+    Serial.println(Serial1.write("pee pee"));
     delay(1000);
+    //kSerial.println("Message sent");
 }
