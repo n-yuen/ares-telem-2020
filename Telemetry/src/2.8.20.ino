@@ -25,22 +25,18 @@ void setup() {
   gpsSerial.begin(9600);
   radioSerial.begin(57600); //Serial port to radio
   //initialize IMU, barometer, temperature on ble
-  if (!IMU.begin()) {
-      while (!IMU.accelerationAvailable())
+    while (!IMU.begin()) {
         IMU.begin();
     }
-    if (!BARO.begin()) {
-      while (!BARO.available())
+    while (!BARO.begin()) {
         BARO.begin();
     }
-    if (!HTS.begin()) {
-      while (!HTS.available())
+    while (!HTS.begin()) {
         HTS.begin();
     }
 
     //initialize sd card
-    if (!SD.begin(SD_CHIPSEL)) {
-      while (!SD.available())
+    while (!SD.begin(SD_CHIPSEL)) {
         SD.begin(SD_CHIPSEL);
     }
 }
