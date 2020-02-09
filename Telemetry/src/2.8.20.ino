@@ -12,6 +12,7 @@ UART gpsSerial(digitalPinToPinName(4), digitalPinToPinName(3), NC, NC);
 TinyGPSPlus gps;
 File myFile;
 
+unsigned long t;
 struct gpsCoordinate {
   uint16_t lat;
   uint16_t lng;
@@ -25,24 +26,29 @@ void setup() {
   radioSerial.begin(57600); //Serial port to radio
   //initialize IMU, barometer, temperature on ble
   if (!IMU.begin()) {
-      while (1);
+      while (!IMU.accelerationAvailable())
+        IMU.begin();
     }
     if (!BARO.begin()) {
-      while (1);
+      while (!BARO.available())
+        BARO.begin();
     }
     if (!HTS.begin()) {
-      while (1);
+      while (!HTS.available())
+        HTS.begin();
     }
 
     //initialize sd card
     if (!SD.begin(SD_CHIPSEL)) {
-      return;
+      while (!SD.available())
+        SD.begin(SD_CHIPSEL);
     }
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 //READ IMU DATA
+  t = millis();
   float ax, ay, az, gx, gy, gz, mx, my, mz = 0;
   if (IMU.accelerationAvailable())  {
     IMU.readAcceleration(ax, ay, az);
@@ -69,6 +75,8 @@ void loop() {
 //SEND
   if (lat != 0 && lng != 0){
     radioSerial.write(";");
+    radioSerial.write(t);
+    radioSerial.write(",");
     radioSerial.write(ax);
     radioSerial.write(ay);
     radioSerial.write(az);
@@ -94,25 +102,25 @@ void loop() {
   //HOW TO FORMAT THIS?
   if (myFile) {
           myFile.print(";");
-          myFile.print(ax);
-          myFile.print(ay);
-          myFile.println(az);
+          myFile.print(t);
+          myFile.print(",");
+          myFile.print(az);
           myFile.print(",");
           myFile.print(gx);
           myFile.print(gy);
-          myFile.println(mz);
+          myFile.print(mz);
           myFile.print(",");
           myFile.print(mx);
           myFile.print(my);
           myFile.println(mz);
           myFile.print(",");
-          myFile.println(temp);
+          myFile.print(temp);
           myFile.print(",");
-          myFile.println(pressure);
+          myFile.print(pressure);
           myFile.print(",");
           myFile.print(lat);
           myFile.print(",");
-          myFile.print(lng);
+          myFile.println(lng);
         // close the file:
           myFile.close();
   }
