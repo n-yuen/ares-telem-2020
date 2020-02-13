@@ -7,8 +7,10 @@ extern void warmup();
 extern void refresh();
 
 void setup() {
+	// Start serial
 	SerialUSB.begin(115200);
 	uint32_t serialAwaitStart = millis();
+	// Wait 3secs
 	while(millis() - serialAwaitStart < 3000 && !SerialUSB);
 	SerialUSB.println("Congratulations on your code compiling");
 	preWarmup();

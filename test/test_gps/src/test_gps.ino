@@ -117,12 +117,12 @@ void loop() {
         if (IMU.magneticFieldAvailable()){
           IMU.readMagneticField(mx, my, mz);
         }
-        float temp = HTS.readTemperature(CELCIUS);
-        float pressure = BARO.readPressure(kilopascal);
+        float temp = HTS.readTemperature();
+        float pressure = BARO.readPressure();
         
          myFile = SD.open("test.txt", FILE_WRITE);
          if (myFile) {
-                  Serial.print("Writing to test.txt...");
+                  //Serial.print("Writing to test.txt...");
                   myFile.print("Accel = ");
                   myFile.print(ax);
                   myFile.print(ay);
