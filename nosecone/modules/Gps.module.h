@@ -6,8 +6,8 @@
 #define GPS_BAUD 9600
 
 namespace Gps{
-    float lat;
-    float lng;
+    extern float lat;
+    extern float lng;
     
     UART gpsSerial(digitalPinToPinName(RX_GPS), digitalPinToPinName(TX_GPS), NC, NC);
 
