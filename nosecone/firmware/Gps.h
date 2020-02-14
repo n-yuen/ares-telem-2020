@@ -1,3 +1,5 @@
+#pragma once
+#include "RocketModule.h"
 ///https://codeload.github.com/mikalhart/TinyGPSPlus/zip/master
 #include <TinyGPS++.h>
 
@@ -6,8 +8,8 @@
 #define GPS_BAUD 9600
 
 namespace Gps{
-    float lat;
-    float lng;
+    float &lat = Rocket::data.Gps_lat;
+    float &lng = Rocket::data.Gps_lng;
     
     UART gpsSerial(digitalPinToPinName(RX_GPS), digitalPinToPinName(TX_GPS), NC, NC);
 
