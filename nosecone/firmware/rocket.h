@@ -40,6 +40,7 @@ const int SdCard_ID = 4;
 }  // namespace Rocket
 
 #include "Bmp.h"
+#include "Gps.h"
 #include "Mpu.h"
 #include "Radio.h"
 #include "SdCard.h"
@@ -47,10 +48,11 @@ const int SdCard_ID = 4;
 
 namespace Rocket {
 static Bmp::Handler Bmp_INSTANCE;
+static Gps::Handler Gps_INSTANCE;
 static Mpu::Handler Mpu_INSTANCE;
 static Radio::Handler Radio_INSTANCE;
 static SdCard::Handler SdCard_INSTANCE;
-static RocketModule *handlers[] = {&Bmp_INSTANCE,
+static RocketModule *handlers[] = {&Bmp_INSTANCE, &Gps_INSTANCE,
                                    &Mpu_INSTANCE, &Radio_INSTANCE,
                                    &SdCard_INSTANCE};
 }  // namespace Rocket
