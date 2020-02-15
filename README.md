@@ -1,4 +1,4 @@
-# ARES-TELEMETRY-2019
+# ARES-TELEMETRY-2020
 This project is an Arduino sketch designed for the Nano 33 BLE that takes telemetry data from:
 * pressure transducers
 * IMU - LSM9DS1
