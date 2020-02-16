@@ -3,7 +3,7 @@
 #include <Arduino_HTS221.h>
 
 namespace Hts {
-    float &temperature = Rocket::data.Bmp_temperature;
+    float &temperature = Rocket::data.Hts_temperature;
     
     class Handler: public Rocket::RocketModule {
     public:
