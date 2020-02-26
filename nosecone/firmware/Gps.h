@@ -3,8 +3,8 @@
 ///https://codeload.github.com/mikalhart/TinyGPSPlus/zip/master
 #include <TinyGPS++.h>
 
-#define RX_GPS 4
-#define TX_GPS 3
+#define RX_GPS 9
+#define TX_GPS 10
 #define GPS_BAUD 9600
 
 namespace Gps{
