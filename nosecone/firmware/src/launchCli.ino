@@ -1,4 +1,4 @@
-#include <FlashStorage.h>
+//#include <FlashStorage.h>
 #include "launchCli.h"
 
 void preWarmup();
@@ -7,9 +7,11 @@ void refresh();
 void shutdown();
 
 //persistent settings (all bytes)
-FlashStorage(enabledModules, byte);
+// FlashStorage(enabledModules, byte);
 
-byte enabledByte = enabledModules.read(); //cache value to save a roundtrip
+byte enabledByte = 255;
+
+//byte enabledByte = enabledModules.read(); //cache value to save a roundtrip
 
 extern bool isOn;
 uint32_t refreshTimes[Rocket::MODULE_NUM];
@@ -34,9 +36,9 @@ void runCli() {
             break;
         case Rocket::SET_MODULES_EN:
             identifier = awaitArg();
-            if(identifier != enabledByte) {
-                enabledModules.write(identifier);
-            }
+            // if(identifier != enabledByte) {
+            //     enabledModules.write(identifier);
+            // }
             SerialUSB.println(identifier, BIN);
             enabledByte = identifier;
             SerialUSB.println();

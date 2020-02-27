@@ -1,5 +1,8 @@
 #pragma once
 
+#define FILE_ID     0x0001
+#define RECORD_KEY  0x1111
+
 namespace Rocket {
     class RocketModule {
     public:

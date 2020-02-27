@@ -41,7 +41,6 @@ void setup() {
     Serial.print("Trying to create file: ");
     if(saveFile = SD.open("./output.txt", FILE_WRITE)) {
         Serial.println("Created file");
-        return;
     }
     else {
         Serial.println("Couldn't create the file");

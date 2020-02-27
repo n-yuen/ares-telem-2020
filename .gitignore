@@ -3,12 +3,14 @@ verbose/
 .vscode/*
 .pip/*
 .pio/*
-*/.gitignore
+.gitignore
+
+.vscode/
 
 .DS_STORE
 */.DS_STORE
 */README
-*/.travis.yml
+.travis.yml
 
 .pio/
 */platformio.ini

@@ -7,7 +7,6 @@ extern void warmup();
 extern void refresh();
 
 void setup() {
-	// Start serial
 	SerialUSB.begin(115200);
 	uint32_t serialAwaitStart = millis();
 	// Wait 3secs
